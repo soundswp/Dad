@@ -14,9 +14,9 @@ export function LinkedInLink({ className = "" }: { className?: string }) {
 export function SiteHeader() {
   return (
     <nav className="site-nav global-nav" aria-label="Primary navigation">
-      <Link className="wordmark" href="/" aria-label="Henry Jones home"><span className="mark" aria-hidden="true">HJ</span><span>HENRY JONES, PhD <small>STRATEGIC ADVISOR</small></span></Link>
-      <div className="nav-links">{navigation.slice(0, -1).map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}<Link className="nav-cta" href="/contact">Contact <span aria-hidden="true">↗</span></Link></div>
-      <details className="mobile-nav"><summary aria-label="Open navigation">Menu</summary><div>{navigation.map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}</div></details>
+      <a className="wordmark" href="/" aria-label="Henry Jones home"><span className="mark" aria-hidden="true">HJ</span><span>HENRY JONES, PhD <small>STRATEGIC ADVISOR</small></span></a>
+      <div className="nav-links">{navigation.slice(0, -1).map(([label, href]) => <a href={href} key={href}>{label}</a>)}<a className="nav-cta" href="/contact">Contact <span aria-hidden="true">↗</span></a></div>
+      <details className="mobile-nav"><summary aria-label="Open navigation">Menu</summary><div>{navigation.map(([label, href]) => <a href={href} key={href}>{label}</a>)}</div></details>
     </nav>
   );
 }
