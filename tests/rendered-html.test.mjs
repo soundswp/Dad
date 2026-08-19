@@ -1,0 +1,74 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+
+async function render(pathname = "/") {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${pathname}`);
+  const { default: worker } = await import(workerUrl.href);
+
+  return worker.fetch(
+    new Request(`http://localhost${pathname}`, { headers: { accept: "text/html" } }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+}
+
+test("server-renders the advisory site and primary navigation", async () => {
+  const response = await render();
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+
+  const html = await response.text();
+  assert.match(html, /<title>Henry Jones, PhD — Ocean &amp; Atmospheric Science Advisor<\/title>/i);
+  assert.match(html, /Retired U\.S\. Navy Commander/);
+  assert.match(html, /DR\. HENRY JONES, PhD/);
+  assert.match(html, /Strategic Advisor in Ocean &amp; Atmospheric Science/);
+  assert.match(html, /Helping organizations make informed decisions through decades of scientific expertise/);
+  assert.match(html, /href="\/experience"/);
+  assert.match(html, /href="\/projects"/);
+  assert.match(html, /href="\/research"/);
+  assert.match(html, /class="expertise-card glass-card"/);
+  assert.doesNotMatch(html, /radar|hero-grid|signal-a|codex-preview/i);
+});
+
+test("renders expandable project, experience, and research entries", async () => {
+  const [projects, experience, research] = await Promise.all([
+    render("/projects").then((response) => response.text()),
+    render("/experience").then((response) => response.text()),
+    render("/research").then((response) => response.text()),
+  ]);
+
+  assert.match(projects, /class="case-study"/);
+  assert.match(projects, /Technical approach/);
+  assert.match(projects, /Nuclear Facility Flooding &amp; Tsunami Safety/);
+  assert.match(experience, /class="experience-entry"/);
+  assert.match(experience, /2016–2019/);
+  assert.match(research, /class="research-entry"/);
+  assert.match(research, /PUBLICATIONS &amp; PRESENTATIONS/);
+});
+
+test("renders both video interviews on the About page", async () => {
+  const about = await render("/about").then((response) => response.text());
+  assert.match(about, /youtube\.com\/embed\/aGyzn2DQo00/);
+  assert.match(about, /youtube\.com\/embed\/JjOxszX8vbE/);
+  assert.match(about, /Dr\. Henry Jones in conversation/);
+  assert.match(about, /linkedin\.com\/in\/henry-jones-5835101b/);
+});
+
+test("presents strategic and technical advisory as distinct services", async () => {
+  const advisory = await render("/advisory").then((response) => response.text());
+  assert.match(advisory, /Helping organizations evaluate complex decisions, programs, and opportunities/);
+  assert.match(advisory, /Providing scientific expertise in oceanography, meteorology, environmental systems/);
+  assert.match(advisory, /Strategic Advisory/);
+  assert.match(advisory, /Technical Advisory/);
+});
+
+test("includes the luxury maritime visual system and reduced-motion support", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(css, /Luxury maritime editorial system/);
+  assert.match(css, /--seaglass:#9bbcaf/);
+  assert.match(css, /@keyframes oceanLight/);
+  assert.match(css, /prefers-reduced-motion:reduce/);
+  assert.match(css, /interpolate-size:allow-keywords/);
+});
