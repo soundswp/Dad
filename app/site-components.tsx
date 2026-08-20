@@ -25,7 +25,7 @@ export function SiteFooter() {
   return (
     <footer>
       <Link className="wordmark" href="/"><span className="mark" aria-hidden="true">HJ</span><span>HENRY JONES, PhD <small>STRATEGIC ADVISOR</small></span></Link>
-      <div className="footer-links"><a href="mailto:hjusn@yahoo.com">Email</a><LinkedInLink /><Link href="/about#awards">Awards</Link></div>
+      <div className="footer-links"><a href="mailto:contact@henryjonesadvisory.com">Email</a><LinkedInLink /><Link href="/about#awards">Awards</Link></div>
       <p>© 2026 Dr. Henry Jones.</p>
     </footer>
   );

@@ -356,7 +356,7 @@ export function FullProfileArchive() {
 
       <section className="contact-section" id="contact"><div className="contact-intro"><p className="eyebrow"><span aria-hidden="true" /> Contact</p><h2>Discuss a technical or advisory need.</h2><p>Get in touch about ocean science, environmental risk, government programs, technical reviews, or speaking engagements.</p><div className="contact-status"><i aria-hidden="true" /> Available for select engagements</div></div><ContactForm /></section>
 
-      <footer><a className="wordmark" href="#top"><span className="mark" aria-hidden="true">HJ</span><span>HENRY JONES, PhD <small>TECHNICAL ADVISOR</small></span></a><div className="footer-links"><a href="mailto:hjusn@yahoo.com">Email</a><a href="#awards">Awards</a><span>American Geophysical Union</span><span>American Meteorological Society</span></div><p>© 2026 Henry Jones. Career information sourced from the supplied resume and CV.</p></footer>
+      <footer><a className="wordmark" href="#top"><span className="mark" aria-hidden="true">HJ</span><span>HENRY JONES, PhD <small>TECHNICAL ADVISOR</small></span></a><div className="footer-links"><a href="mailto:contact@henryjonesadvisory.com">Email</a><a href="#awards">Awards</a><span>American Geophysical Union</span><span>American Meteorological Society</span></div><p>© 2026 Henry Jones. Career information sourced from the supplied resume and CV.</p></footer>
     </main>
   );
 }

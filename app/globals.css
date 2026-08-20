@@ -566,9 +566,12 @@ h1 em,.about-copy h2 em { color:#b6c5c3; font-weight:400; }
 .contact-form input,.contact-form select,.contact-form textarea { background:rgba(6,23,32,.55); border-color:rgba(219,230,225,.2); color:#f4f1eb; font-size:15px; border-radius:3px; }
 .contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus { border-color:#b8d0c8; box-shadow:0 0 0 3px rgba(174,201,192,.1); }
 .contact-form button { color:#10252e; background:#e9e8df; font-family:var(--sans); font-size:12px; font-weight:650; letter-spacing:.04em; text-transform:none; border-radius:3px; }
+.contact-form button:disabled { cursor:wait; opacity:.68; }
 .contact-status { color:#bac9c6; font-family:var(--sans); font-size:12px; letter-spacing:.06em; }
 .contact-status i { background:#98bbaa; box-shadow:none; }
 .form-note { color:#b4c1bf; font-size:12px; }
+.form-note.form-error { color:#f0b9ad; }
+.form-trap { position:absolute!important; width:1px!important; height:1px!important; overflow:hidden!important; clip:rect(0 0 0 0)!important; clip-path:inset(50%)!important; white-space:nowrap!important; }
 
 footer { padding:56px 0; }
 .footer-links { color:#bdc8c6; font-family:var(--sans); font-size:12px; letter-spacing:.04em; text-transform:none; }

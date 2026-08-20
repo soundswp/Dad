@@ -81,6 +81,39 @@ test("presents strategic and technical advisory as distinct services", async () 
   assert.match(advisory, /Independent Technical Review/);
 });
 
+test("delivers contact form submissions through the configured email binding", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-contact-form`);
+  const { default: worker } = await import(workerUrl.href);
+  const deliveries = [];
+
+  const response = await worker.fetch(
+    new Request("http://localhost/api/contact", {
+      method: "POST",
+      headers: { "content-type": "application/json", origin: "http://localhost" },
+      body: JSON.stringify({
+        name: "Jane Executive",
+        organization: "Coastal Infrastructure Group",
+        email: "jane@example.com",
+        reason: "Advisory Opportunity",
+        message: "We would like to discuss an environmental risk review.",
+        website: "",
+      }),
+    }),
+    {
+      ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) },
+      CONTACT_EMAIL: { send: async (message) => { deliveries.push(message); return { messageId: "test-message" }; } },
+    },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+
+  assert.equal(response.status, 200);
+  assert.equal(deliveries.length, 1);
+  assert.equal(deliveries[0].to, "hjusn@yahoo.com");
+  assert.equal(deliveries[0].replyTo, "jane@example.com");
+  assert.match(deliveries[0].text, /Coastal Infrastructure Group/);
+});
+
 test("includes the luxury maritime visual system and reduced-motion support", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /Luxury maritime editorial system/);

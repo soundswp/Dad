@@ -31,6 +31,12 @@ const localBindingConfig = {
         },
       ]
     : [],
+  send_email: [
+    {
+      name: "CONTACT_EMAIL",
+      destination_address: "hjusn@yahoo.com",
+    },
+  ],
 };
 
 export default defineConfig(async () => {
