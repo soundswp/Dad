@@ -109,7 +109,7 @@ test("delivers contact form submissions through the configured email binding", a
 
   assert.equal(response.status, 200);
   assert.equal(deliveries.length, 1);
-  assert.equal(deliveries[0].to, "hjusn@yahoo.com");
+  assert.equal(deliveries[0].to, "henryvj11@gmail.com");
   assert.equal(deliveries[0].replyTo, "jane@example.com");
   assert.match(deliveries[0].text, /Coastal Infrastructure Group/);
 });

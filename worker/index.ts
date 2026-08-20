@@ -23,7 +23,7 @@ interface Env {
   };
 }
 
-const CONTACT_RECIPIENT = "hjusn@yahoo.com";
+const CONTACT_RECIPIENT = "henryvj11@gmail.com";
 const CONTACT_SENDER = "website@henryjonesadvisory.com";
 const CONTACT_REASONS = new Set([
   "Advisory Opportunity",

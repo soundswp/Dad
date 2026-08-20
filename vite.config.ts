@@ -34,7 +34,7 @@ const localBindingConfig = {
   send_email: [
     {
       name: "CONTACT_EMAIL",
-      destination_address: "hjusn@yahoo.com",
+      destination_address: "henryvj11@gmail.com",
     },
   ],
 };
