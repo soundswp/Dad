@@ -29,6 +29,8 @@ test("server-renders the advisory site and primary navigation", async () => {
   assert.match(html, /href="\/projects"/);
   assert.match(html, /href="\/research"/);
   assert.match(html, /class="expertise-card glass-card"/);
+  assert.match(html, /Selected Projects/);
+  assert.doesNotMatch(html, /Examples of scientific, operational, and federal programs/);
   assert.doesNotMatch(html, /radar|hero-grid|signal-a|codex-preview/i);
 });
 
@@ -40,14 +42,17 @@ test("renders expandable project, experience, and research entries", async () =>
   ]);
 
   assert.match(projects, /class="case-study"/);
-  assert.match(projects, /class="eyebrow projects-page-title"/);
-  assert.match(projects, /Examples of scientific, operational, and federal programs/);
+  assert.match(projects, /Selected Projects/);
+  assert.doesNotMatch(projects, /Examples of scientific, operational, and federal programs/);
   assert.match(projects, /Technical approach/);
   assert.match(projects, /Nuclear Facility Flooding &amp; Tsunami Safety/);
   assert.match(experience, /class="experience-entry"/);
   assert.match(experience, /2016–2019/);
   assert.match(experience, /Key result/);
   assert.match(experience, /secured \$60 million/);
+  assert.match(experience, /Career Timeline/);
+  assert.match(experience, /A career spanning U\.S\. Navy operations, ocean and atmospheric science, federal programs, nuclear safety, research, and higher education\./);
+  assert.doesNotMatch(experience, /Roles, responsibilities, and results\./);
   assert.match(research, /class="research-entry"/);
   assert.match(research, /RESEARCH LIBRARY/);
   assert.match(research, /Technical Reports/);

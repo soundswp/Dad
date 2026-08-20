@@ -333,7 +333,7 @@ export function FullProfileArchive() {
       </section>
 
       <section className="section projects-section" id="projects">
-        <SectionHeading eyebrow="Projects" title="Examples of scientific, operational, and federal programs Dr. Jones has contributed to throughout his career." />
+        <SectionHeading eyebrow="Projects" title="Selected Projects" />
         <div className="projects-grid">{projects.map((project, index) => <article className="project-card glass-card" key={project.name}><div className="project-number">0{index + 1}</div><p className="project-org">{project.organization}</p><h3>{project.name}</h3><dl><div><dt>Problem</dt><dd>{project.problem}</dd></div><div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Outcome</dt><dd>{project.outcome}</dd></div></dl></article>)}</div>
       </section>
 
@@ -378,7 +378,7 @@ export default function Home() {
 
       <section className="section home-section"><SectionHeading eyebrow="Expertise" title="Areas of Expertise" /><div className="expertise-grid preview-grid">{expertise.map((item) => <details className="expertise-card glass-card" key={item.title}><summary><div className="card-top"><span className="icon-orbit" aria-hidden="true">{item.code}</span></div><h3>{item.title}</h3><p>{item.description}</p><span className="expand-label">View capabilities <b aria-hidden="true">+</b></span></summary><div className="expand-panel"><h4>Capabilities</h4><ul>{item.topics.map((topic) => <li key={topic}>{topic}</li>)}</ul><a href="/projects">Related projects <span aria-hidden="true">→</span></a></div></details>)}</div></section>
 
-      <section className="section home-section"><header className="section-heading projects-section-heading"><div><h2 className="eyebrow projects-section-title"><span aria-hidden="true" />Projects</h2></div><p className="section-copy">Examples of scientific, operational, and federal programs Dr. Jones has contributed to throughout his career.</p></header><div className="projects-grid preview-projects">{projects.slice(0,3).map((project) => <article className="project-card glass-card" key={project.name}><div className="project-number">{project.dates}</div><p className="project-org">{project.organization}</p><h3>{project.name}</h3><p>{project.outcome}</p></article>)}</div><a className="section-link" href="/projects">View all projects <span aria-hidden="true">→</span></a></section>
+      <section className="section home-section"><SectionHeading eyebrow="Projects" title="Selected Projects" /><div className="projects-grid preview-projects">{projects.slice(0,3).map((project) => <article className="project-card glass-card" key={project.name}><div className="project-number">{project.dates}</div><p className="project-org">{project.organization}</p><h3>{project.name}</h3><p>{project.outcome}</p></article>)}</div><a className="section-link" href="/projects">View all projects <span aria-hidden="true">→</span></a></section>
 
       <section className="home-contact"><div><p className="eyebrow"><span aria-hidden="true" /> Advisory work</p><h2>Need experienced strategic and technical judgment?</h2><p>Discuss strategic advisory, technical advisory, a government partnership, or a speaking engagement.</p></div><a className="button button-primary" href="/contact">Contact Dr. Jones <span aria-hidden="true">↗</span></a></section>
     </main>

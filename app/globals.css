@@ -1078,32 +1078,6 @@ footer { padding:56px 0; }
   line-height:1.76;
 }
 
-.page-hero .projects-page-title {
-  max-width:none;
-  margin:0 0 22px;
-  color:#b4cbc5;
-  font-family:var(--sans);
-  font-size:12px;
-  font-weight:600;
-  line-height:1.3;
-  letter-spacing:.1em;
-}
-.projects-page-hero .page-hero-content>p:last-child {
-  max-width:760px;
-  margin-top:0;
-}
-.section .projects-section-title {
-  max-width:none;
-  margin:0;
-  color:#b4cbc5;
-  font-family:var(--sans);
-  font-size:12px;
-  font-weight:600;
-  line-height:1.3;
-  letter-spacing:.1em;
-}
-.projects-section-heading { align-items:start; }
-
 .service-group-title,
 .services-section .service-group-title {
   margin:0 0 26px;
@@ -1139,7 +1113,6 @@ footer { padding:56px 0; }
 @media (max-width:620px) {
   .biography-narrative { gap:16px; }
   .biography-narrative p { font-size:16px; line-height:1.72; }
-  .page-hero .projects-page-title { font-size:12px; }
   .service-group-title,
   .services-section .service-group-title { margin-bottom:18px; font-size:26px; }
   .primary-service-list .service-row,
