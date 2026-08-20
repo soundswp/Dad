@@ -1064,3 +1064,98 @@ footer { padding:56px 0; }
   .research-filters button { transition:none; }
   .research-filter-results { animation:none; }
 }
+
+/* Focused About, Projects, and Advisory refinements */
+.biography-narrative {
+  max-width:700px;
+  display:grid;
+  gap:18px;
+}
+.biography-narrative p {
+  margin:0;
+  color:#d0d7d4;
+  font-size:16px;
+  line-height:1.76;
+}
+
+.page-hero .projects-page-title {
+  max-width:none;
+  margin:0 0 22px;
+  color:#b4cbc5;
+  font-family:var(--sans);
+  font-size:12px;
+  font-weight:600;
+  line-height:1.3;
+  letter-spacing:.1em;
+}
+.projects-page-hero .page-hero-content>p:last-child {
+  max-width:760px;
+  margin-top:0;
+}
+.section .projects-section-title {
+  max-width:none;
+  margin:0;
+  color:#b4cbc5;
+  font-family:var(--sans);
+  font-size:12px;
+  font-weight:600;
+  line-height:1.3;
+  letter-spacing:.1em;
+}
+.projects-section-heading { align-items:start; }
+
+.service-group-title,
+.services-section .service-group-title {
+  margin:0 0 26px;
+  color:#eeeee7;
+  font-size:32px;
+  line-height:1.15;
+  letter-spacing:-.02em;
+}
+.primary-service-list .service-row {
+  min-height:158px;
+  padding:0 22px;
+  background:linear-gradient(90deg,rgba(225,233,229,.045),rgba(225,233,229,.012) 72%,transparent);
+}
+.primary-service-list .service-row:hover { padding-left:30px; }
+.primary-service-list .service-row h3 { color:#f2f0e9; font-size:29px; }
+.primary-service-list .service-row p { color:#d0d7d4; }
+.additional-service-group { margin-top:78px; }
+.additional-service-group .service-group-title,
+.services-section .additional-service-group .service-group-title {
+  margin-bottom:18px;
+  color:#cdd5d2;
+  font-size:23px;
+}
+.additional-service-list .service-row {
+  min-height:108px;
+  grid-template-columns:52px 1fr 1.15fr 24px;
+  opacity:.88;
+}
+.additional-service-list .service-row h3 { font-size:22px; }
+.additional-service-list .service-row p { color:#bec9c6; font-size:15px; }
+.additional-service-list .service-row b { opacity:.62; }
+
+@media (max-width:620px) {
+  .biography-narrative { gap:16px; }
+  .biography-narrative p { font-size:16px; line-height:1.72; }
+  .page-hero .projects-page-title { font-size:12px; }
+  .service-group-title,
+  .services-section .service-group-title { margin-bottom:18px; font-size:26px; }
+  .primary-service-list .service-row,
+  .primary-service-list .service-row:hover {
+    min-height:0;
+    padding:26px 12px;
+  }
+  .primary-service-list .service-row h3 { font-size:22px; }
+  .additional-service-group { margin-top:58px; }
+  .additional-service-group .service-group-title,
+  .services-section .additional-service-group .service-group-title { font-size:21px; }
+  .additional-service-list .service-row {
+    min-height:0;
+    grid-template-columns:34px 1fr 22px;
+    padding:22px 0;
+  }
+  .additional-service-list .service-row h3 { font-size:19px; }
+  .additional-service-list .service-row p { grid-column:2/4; font-size:14px; }
+}

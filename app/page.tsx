@@ -25,9 +25,9 @@ export const expertise = [
 
 export const services = [
   ["01", "Strategic Advisory", "Helping organizations evaluate complex decisions, programs, and opportunities."],
-  ["02", "Technical Advisory", "Providing scientific expertise in oceanography, meteorology, environmental systems, and related technologies."],
-  ["03", "Scientific Consulting", "Analysis of oceanographic, meteorological, hydrologic, and environmental information."],
-  ["04", "Government & Federal Partnerships", "Advice for organizations working with federal agencies, national laboratories, and defense programs."],
+  ["02", "Technical Advisory", "Providing scientific expertise and independent review of technical programs and approaches."],
+  ["03", "Scientific Consulting", "Applying expertise in oceanography, meteorology, environmental systems, and related scientific fields."],
+  ["04", "Government & Federal Partnerships", "Helping organizations understand and work with federal science and defense programs."],
   ["05", "Environmental Risk Review", "Review of coastal flooding, storm surge, tsunami, seiche, and infrastructure safety questions."],
   ["06", "Independent Technical Review", "Independent review of complex scientific programs, technical plans, and environmental analyses."],
   ["07", "Board & Advisory Roles", "Available to provide scientific and program-management perspective to boards and advisory groups."],
@@ -333,7 +333,7 @@ export function FullProfileArchive() {
       </section>
 
       <section className="section projects-section" id="projects">
-        <SectionHeading eyebrow="Projects" title="Projects" copy="Each example identifies the problem, his role, and the documented result or significance." />
+        <SectionHeading eyebrow="Projects" title="Examples of scientific, operational, and federal programs Dr. Jones has contributed to throughout his career." />
         <div className="projects-grid">{projects.map((project, index) => <article className="project-card glass-card" key={project.name}><div className="project-number">0{index + 1}</div><p className="project-org">{project.organization}</p><h3>{project.name}</h3><dl><div><dt>Problem</dt><dd>{project.problem}</dd></div><div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Outcome</dt><dd>{project.outcome}</dd></div></dl></article>)}</div>
       </section>
 
@@ -378,7 +378,7 @@ export default function Home() {
 
       <section className="section home-section"><SectionHeading eyebrow="Expertise" title="Areas of Expertise" /><div className="expertise-grid preview-grid">{expertise.map((item) => <details className="expertise-card glass-card" key={item.title}><summary><div className="card-top"><span className="icon-orbit" aria-hidden="true">{item.code}</span></div><h3>{item.title}</h3><p>{item.description}</p><span className="expand-label">View capabilities <b aria-hidden="true">+</b></span></summary><div className="expand-panel"><h4>Capabilities</h4><ul>{item.topics.map((topic) => <li key={topic}>{topic}</li>)}</ul><a href="/projects">Related projects <span aria-hidden="true">→</span></a></div></details>)}</div></section>
 
-      <section className="section home-section"><SectionHeading eyebrow="Projects" title="Projects" /><div className="projects-grid preview-projects">{projects.slice(0,3).map((project) => <article className="project-card glass-card" key={project.name}><div className="project-number">{project.dates}</div><p className="project-org">{project.organization}</p><h3>{project.name}</h3><p>{project.outcome}</p></article>)}</div><a className="section-link" href="/projects">View all projects <span aria-hidden="true">→</span></a></section>
+      <section className="section home-section"><header className="section-heading projects-section-heading"><div><h2 className="eyebrow projects-section-title"><span aria-hidden="true" />Projects</h2></div><p className="section-copy">Examples of scientific, operational, and federal programs Dr. Jones has contributed to throughout his career.</p></header><div className="projects-grid preview-projects">{projects.slice(0,3).map((project) => <article className="project-card glass-card" key={project.name}><div className="project-number">{project.dates}</div><p className="project-org">{project.organization}</p><h3>{project.name}</h3><p>{project.outcome}</p></article>)}</div><a className="section-link" href="/projects">View all projects <span aria-hidden="true">→</span></a></section>
 
       <section className="home-contact"><div><p className="eyebrow"><span aria-hidden="true" /> Advisory work</p><h2>Need experienced strategic and technical judgment?</h2><p>Discuss strategic advisory, technical advisory, a government partnership, or a speaking engagement.</p></div><a className="button button-primary" href="/contact">Contact Dr. Jones <span aria-hidden="true">↗</span></a></section>
     </main>

@@ -40,6 +40,8 @@ test("renders expandable project, experience, and research entries", async () =>
   ]);
 
   assert.match(projects, /class="case-study"/);
+  assert.match(projects, /class="eyebrow projects-page-title"/);
+  assert.match(projects, /Examples of scientific, operational, and federal programs/);
   assert.match(projects, /Technical approach/);
   assert.match(projects, /Nuclear Facility Flooding &amp; Tsunami Safety/);
   assert.match(experience, /class="experience-entry"/);
@@ -53,6 +55,9 @@ test("renders expandable project, experience, and research entries", async () =>
 
 test("renders both video interviews on the About page", async () => {
   const about = await render("/about").then((response) => response.text());
+  assert.match(about, /began his career in the U\.S\. Navy after graduating from the United States Naval Academy in 1979/);
+  assert.match(about, /High Energy Laser Theater Missile Defense Program/);
+  assert.match(about, /federal scientific leadership roles with the U\.S\. Nuclear Regulatory Commission and U\.S\. Geological Survey/);
   assert.match(about, /youtube\.com\/embed\/aGyzn2DQo00/);
   assert.match(about, /youtube\.com\/embed\/JjOxszX8vbE/);
   assert.match(about, /Dr\. Henry Jones in conversation/);
@@ -62,9 +67,11 @@ test("renders both video interviews on the About page", async () => {
 test("presents strategic and technical advisory as distinct services", async () => {
   const advisory = await render("/advisory").then((response) => response.text());
   assert.match(advisory, /Helping organizations evaluate complex decisions, programs, and opportunities/);
-  assert.match(advisory, /Providing scientific expertise in oceanography, meteorology, environmental systems/);
+  assert.match(advisory, /Providing scientific expertise and independent review of technical programs and approaches/);
   assert.match(advisory, /Strategic Advisory/);
   assert.match(advisory, /Technical Advisory/);
+  assert.match(advisory, /Primary Advisory Services/);
+  assert.match(advisory, /Additional Engagements/);
   assert.match(advisory, /When Dr\. Jones Can Help/);
   assert.match(advisory, /Independent Technical Review/);
 });

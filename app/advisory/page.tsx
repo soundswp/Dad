@@ -16,12 +16,26 @@ const clientScenarios = [
   "Leadership needs scientific information translated into practical options and recommendations.",
 ];
 
+const primaryServices = services.slice(0, 4);
+const additionalEngagements = services.slice(4);
+
+function ServiceList({ items, className = "" }: { items: string[][]; className?: string }) {
+  return <div className={`service-list ${className}`.trim()}>{items.map(([number,title,description]) => <article className="service-row" key={title}><span>{number}</span><h3>{title}</h3><p>{description}</p><b aria-hidden="true">↗</b></article>)}</div>;
+}
+
 export default function AdvisoryPage() {
   return (
     <main className="page-shell">
       <PageIntro eyebrow="Advisory" index="06 / 06" title="Advisory services." copy="Strategic and technical advice for organizations working in ocean and atmospheric science, operational meteorology, environmental risk, government, and defense." />
       <section className="section services-section content-first">
-        <div className="service-list">{services.map(([number,title,description]) => <article className="service-row" key={title}><span>{number}</span><h3>{title}</h3><p>{description}</p><b aria-hidden="true">↗</b></article>)}</div>
+        <div className="service-group primary-service-group">
+          <h2 className="service-group-title">Primary Advisory Services</h2>
+          <ServiceList items={primaryServices} className="primary-service-list" />
+        </div>
+        <div className="service-group additional-service-group">
+          <h2 className="service-group-title">Additional Engagements</h2>
+          <ServiceList items={additionalEngagements} className="additional-service-list" />
+        </div>
       </section>
       <section className="section advisory-help">
         <SectionHeading eyebrow="When to get in touch" title="When Dr. Jones Can Help" copy="Organizations work with Dr. Jones when a decision or program would benefit from experienced scientific and federal perspective." />
