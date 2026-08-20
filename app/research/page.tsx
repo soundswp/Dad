@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { publications } from "../page";
-import { ContactCTA, PageIntro, SectionHeading } from "../site-components";
+import { ContactCTA, PageIntro } from "../site-components";
+import { ResearchLibrary, type ResearchItem } from "./research-library";
 
-export const metadata: Metadata = { title: "Research | Henry Jones, PhD", description: "Research, presentations, and technical work in physical oceanography, atmospheric science, operational meteorology, hydrology, hazards, and environmental modeling." };
+export const metadata: Metadata = { title: "Research & Publications | Henry Jones, PhD", description: "Research, presentations, and technical work in physical oceanography, atmospheric science, operational meteorology, hydrology, hazards, and environmental modeling." };
 
 const topics = [
   ["Ocean modeling", "Regional ocean-model sensitivity to atmospheric and scatterometer wind forcing."],
@@ -13,12 +14,73 @@ const topics = [
   ["Science education", "Oceanography teaching, research internships, academic advising, and the Maury Project."],
 ];
 
+function researchArea(title: string) {
+  const normalized = title.toLowerCase();
+  if (normalized.includes("tsunami")) return "Coastal hazards and nuclear-facility safety";
+  if (normalized.includes("maury")) return "Ocean science education";
+  if (normalized.includes("canary")) return "Comparative coastal ocean modeling";
+  return "Regional ocean modeling and atmospheric wind forcing";
+}
+
+const presentationItems: ResearchItem[] = publications.map(([year, type, title, venue]) => ({
+  id: `${year}-${type}-${title}`,
+  year,
+  type,
+  title,
+  context: venue,
+  area: researchArea(title),
+  category: "Presentations",
+}));
+
+const technicalReportItems: ResearchItem[] = [
+  {
+    id: "nrc-storm-surge-tsunami-research",
+    year: "2007–2016",
+    type: "Technical reports & guidance",
+    title: "NRC storm surge and tsunami research",
+    context: "Lead hydrologist for storm surge and tsunami research, associated technical reports, and regulatory guidance.",
+    area: "Coastal hazards and nuclear-facility safety",
+    category: "Technical Reports",
+  },
+  {
+    id: "nuclear-reactor-safety-reviews",
+    year: "2007–2016",
+    type: "Technical review",
+    title: "Nuclear reactor safety and environmental reviews",
+    context: "Lead review work covering tsunami, seiche, storm surge, and other hydrologic hazards for major new reactor applications.",
+    area: "Hydrology, environmental safety, and infrastructure risk",
+    category: "Technical Reports",
+  },
+  {
+    id: "jtwc-annual-report",
+    year: "1982–1984",
+    type: "Annual report review",
+    title: "Joint Typhoon Warning Center annual report",
+    context: "Led review of post-tropical-cyclone forecast reanalyses for the center’s annual tropical cyclone report.",
+    area: "Operational meteorology and tropical cyclone forecasting",
+    category: "Technical Reports",
+  },
+  {
+    id: "usgs-rge-edge-policy",
+    year: "2016–2019",
+    type: "Policy & evaluation",
+    title: "USGS RGE-EDGE policy and evaluation",
+    context: "Participated in policy design, development, implementation, training, and mentoring for scientific and equipment-development grade evaluation.",
+    area: "Federal scientific evaluation and research policy",
+    category: "Technical Reports",
+  },
+];
+
+const researchItems = [...presentationItems, ...technicalReportItems];
+
 export default function ResearchPage() {
   return (
     <main className="page-shell">
-      <PageIntro eyebrow="Research" index="04 / 05" title="Publications and technical work." />
-      <section className="section publications content-first"><div className="content-label"><span>PUBLICATIONS & PRESENTATIONS</span></div><div className="research-list">{publications.map(([year,type,title,venue]) => <details className="research-entry" key={year+type+title}><summary><div><span>{year}</span><small>{type}</small></div><h3>{title}</h3><b aria-hidden="true">+</b></summary><div className="research-detail"><span>Venue</span><p>{venue}</p><span>Research area</span><p>{title.toLowerCase().includes("tsunami") ? "Coastal hazards and nuclear-facility safety" : title.toLowerCase().includes("maury") ? "Ocean science education" : title.toLowerCase().includes("canary") ? "Comparative coastal ocean modeling" : "Regional ocean modeling and wind forcing"}</p></div></details>)}</div></section>
-      <section className="section technical-work"><SectionHeading eyebrow="Technical reports" title="Applied technical work." /><div className="research-accordion"><details open><summary><span>01</span><strong>NRC storm surge and tsunami research</strong><b aria-hidden="true">+</b></summary><p>Lead hydrologist for storm surge and tsunami research, associated technical reports, and regulatory guidance from 2007 to 2016.</p></details><details><summary><span>02</span><strong>Nuclear reactor safety and environmental reviews</strong><b aria-hidden="true">+</b></summary><p>Lead review work covering tsunami, seiche, storm surge, and other hydrologic hazards for major new reactor applications.</p></details><details><summary><span>03</span><strong>Joint Typhoon Warning Center annual report</strong><b aria-hidden="true">+</b></summary><p>Led review of post-tropical-cyclone forecast reanalyses for the center’s annual tropical cyclone report.</p></details><details><summary><span>04</span><strong>USGS RGE-EDGE policy and evaluation</strong><b aria-hidden="true">+</b></summary><p>Participated in policy design, development, implementation, training, and mentoring for scientific and equipment-development grade evaluation.</p></details></div></section>
+      <PageIntro eyebrow="Research" index="04 / 05" title="Research & Publications." />
+      <section className="section publications content-first">
+        <div className="content-label"><span>RESEARCH LIBRARY</span></div>
+        <ResearchLibrary items={researchItems} />
+      </section>
       <section className="section topic-summary"><div><p className="eyebrow"><span aria-hidden="true" /> Research topics</p><h2>Technical areas</h2></div><div className="topic-list">{topics.map(([title,copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
       <ContactCTA />
     </main>

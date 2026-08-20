@@ -13,6 +13,7 @@ export type TimelineEntry = {
   code: string;
   description: string;
   highlights: string[];
+  keyResult?: string;
 };
 
 export const expertise = [
@@ -26,9 +27,11 @@ export const services = [
   ["01", "Strategic Advisory", "Helping organizations evaluate complex decisions, programs, and opportunities."],
   ["02", "Technical Advisory", "Providing scientific expertise in oceanography, meteorology, environmental systems, and related technologies."],
   ["03", "Scientific Consulting", "Analysis of oceanographic, meteorological, hydrologic, and environmental information."],
-  ["04", "Government Partnerships", "Advice for organizations working with federal agencies, national laboratories, and defense programs."],
-  ["05", "Environmental Risk", "Review of coastal flooding, storm surge, tsunami, seiche, and infrastructure safety questions."],
-  ["06", "Board & Program Advisory", "Senior technical and program-management advice for boards and executive teams."],
+  ["04", "Government & Federal Partnerships", "Advice for organizations working with federal agencies, national laboratories, and defense programs."],
+  ["05", "Environmental Risk Review", "Review of coastal flooding, storm surge, tsunami, seiche, and infrastructure safety questions."],
+  ["06", "Independent Technical Review", "Independent review of complex scientific programs, technical plans, and environmental analyses."],
+  ["07", "Board & Advisory Roles", "Available to provide scientific and program-management perspective to boards and advisory groups."],
+  ["08", "Speaking Engagements", "Available for talks and discussions on ocean and atmospheric science, public safety, federal programs, and operational leadership."],
 ];
 
 export const timeline: TimelineEntry[] = [
@@ -53,8 +56,9 @@ export const timeline: TimelineEntry[] = [
     highlights: [
       "Served as lead reviewer for storm surge, seiche, and tsunami hazards on all new reactor applications.",
       "Oversaw teams from NRC, Department of Energy national laboratories, USGS, USC, MIT/Woods Hole, and commercial contractors.",
-      "Co-chaired the IAEA Working Group on Tsunami Hazards, served as a member of a Congressional Subcommittee on Hydrology, and monitored $3 million in multi-year research contracts.",
+      "Co-chaired the IAEA Working Group on Tsunami Hazards and served as a member of a Congressional Subcommittee on Hydrology.",
     ],
+    keyResult: "Monitored $3 million in multi-year research contracts supporting hydrologic safety work.",
   },
   {
     dates: "2000–2007",
@@ -87,10 +91,10 @@ export const timeline: TimelineEntry[] = [
     code: "OON",
     description: "Managed Navy research and development programs for operational ocean-observing satellite systems.",
     highlights: [
-      "Directed a $4 million Navy satellite RDT&E program and secured $60 million for the Geosat Follow-On program with GFO II.",
       "Represented Navy research and operational requirements for the National Polar-Orbiting Environmental Satellite System (NPOESS).",
       "Oversaw programs in synthetic aperture radar, ocean color, hyperspectral sensing, and passive ocean-wind sensors.",
     ],
+    keyResult: "Directed a $4 million Navy satellite RDT&E program and secured $60 million for Geosat Follow-On with GFO II.",
   },
   {
     dates: "1992–1994",
@@ -99,10 +103,9 @@ export const timeline: TimelineEntry[] = [
     code: "NRL",
     description: "Managed technical direction, risk reduction, and financial execution for an airborne laser defense program.",
     highlights: [
-      "Oversaw technical direction and financial execution of the $66 million Airborne Laser Theater Missile Defense Program.",
       "Used analysis, risk-reduction plans, COEA studies, and high-energy laser research to move the program from early research into advanced development.",
-      "The transition saved millions in program costs.",
     ],
+    keyResult: "Oversaw a $66 million program whose transition to advanced development saved millions in program costs.",
   },
   {
     dates: "1989–1992",
@@ -115,6 +118,7 @@ export const timeline: TimelineEntry[] = [
       "Served as acting Operations Officer and department head during wartime deployment workup for a crew of 1,500.",
       "Managed information systems for the Navy’s first fully computerized shipboard management and communications system.",
     ],
+    keyResult: "Environmental forecasting supported multiple warfare areas during Operation Desert Shield and Desert Storm.",
   },
   {
     dates: "1987–1989",
@@ -133,8 +137,8 @@ export const timeline: TimelineEntry[] = [
     highlights: [
       "Led operational forecasting services and served as designated Dive Master for Fleet Activities Okinawa.",
       "Proposed adding a high-speed network node to the Navy Oceanographic Data Distribution Expansion System.",
-      "The Navy adopted the proposal, saving millions in Fleet communications costs.",
     ],
+    keyResult: "The Navy adopted his network proposal, saving millions in Fleet communications costs.",
   },
   {
     dates: "1982–1984",
@@ -155,9 +159,9 @@ export const timeline: TimelineEntry[] = [
     description: "Led shipboard electronic warfare, electronic materials, and deck operations early in his Navy career.",
     highlights: [
       "Served as Electronic Warfare Officer, Electronic Materials Officer, and First Lieutenant.",
-      "Led divisions of 40 personnel responsible for shipboard electronic systems and external hardware.",
-      "Served as acting department head and Operations Officer during deployment workup for a crew of more than 200.",
+      "Managed shipboard electronic systems and external hardware responsibilities.",
     ],
+    keyResult: "Led divisions of 40 personnel and served as acting department head and Operations Officer for a crew of more than 200.",
   },
 ];
 
@@ -329,7 +333,7 @@ export function FullProfileArchive() {
       </section>
 
       <section className="section projects-section" id="projects">
-        <SectionHeading eyebrow="Selected projects" title="Programs and missions with documented results." copy="Each example identifies the problem, his role, and the result or significance described in the source documents." />
+        <SectionHeading eyebrow="Projects" title="Projects" copy="Each example identifies the problem, his role, and the documented result or significance." />
         <div className="projects-grid">{projects.map((project, index) => <article className="project-card glass-card" key={project.name}><div className="project-number">0{index + 1}</div><p className="project-org">{project.organization}</p><h3>{project.name}</h3><dl><div><dt>Problem</dt><dd>{project.problem}</dd></div><div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Outcome</dt><dd>{project.outcome}</dd></div></dl></article>)}</div>
       </section>
 
@@ -372,9 +376,9 @@ export default function Home() {
 
       <section className="impact section home-section" aria-labelledby="highlights-title"><p className="eyebrow"><span aria-hidden="true" /> Career highlights</p><h2 id="highlights-title">Decades of scientific, military, and federal service.</h2><div className="metric-grid"><article><strong>38</strong><h3>Years</h3><p>Professional experience</p></article><article><strong>28</strong><h3>Years</h3><p>Department of Defense service</p></article><article><strong>13</strong><h3>Years</h3><p>Undergraduate and graduate teaching</p></article><article><strong>5</strong><h3>Degrees</h3><p>Scientific, technical, and policy education</p></article></div></section>
 
-      <section className="section home-section"><SectionHeading eyebrow="Expertise" title="Technical expertise." /><div className="expertise-grid preview-grid">{expertise.map((item) => <details className="expertise-card glass-card" key={item.title}><summary><div className="card-top"><span className="icon-orbit" aria-hidden="true">{item.code}</span></div><h3>{item.title}</h3><p>{item.description}</p><span className="expand-label">View capabilities <b aria-hidden="true">+</b></span></summary><div className="expand-panel"><h4>Capabilities</h4><ul>{item.topics.map((topic) => <li key={topic}>{topic}</li>)}</ul><a href="/projects">Related projects <span aria-hidden="true">→</span></a></div></details>)}</div></section>
+      <section className="section home-section"><SectionHeading eyebrow="Expertise" title="Areas of Expertise" /><div className="expertise-grid preview-grid">{expertise.map((item) => <details className="expertise-card glass-card" key={item.title}><summary><div className="card-top"><span className="icon-orbit" aria-hidden="true">{item.code}</span></div><h3>{item.title}</h3><p>{item.description}</p><span className="expand-label">View capabilities <b aria-hidden="true">+</b></span></summary><div className="expand-panel"><h4>Capabilities</h4><ul>{item.topics.map((topic) => <li key={topic}>{topic}</li>)}</ul><a href="/projects">Related projects <span aria-hidden="true">→</span></a></div></details>)}</div></section>
 
-      <section className="section home-section"><SectionHeading eyebrow="Projects" title="Programs and missions." /><div className="projects-grid preview-projects">{projects.slice(0,3).map((project) => <article className="project-card glass-card" key={project.name}><div className="project-number">{project.dates}</div><p className="project-org">{project.organization}</p><h3>{project.name}</h3><p>{project.outcome}</p></article>)}</div><a className="section-link" href="/projects">View all projects <span aria-hidden="true">→</span></a></section>
+      <section className="section home-section"><SectionHeading eyebrow="Projects" title="Projects" /><div className="projects-grid preview-projects">{projects.slice(0,3).map((project) => <article className="project-card glass-card" key={project.name}><div className="project-number">{project.dates}</div><p className="project-org">{project.organization}</p><h3>{project.name}</h3><p>{project.outcome}</p></article>)}</div><a className="section-link" href="/projects">View all projects <span aria-hidden="true">→</span></a></section>
 
       <section className="home-contact"><div><p className="eyebrow"><span aria-hidden="true" /> Advisory work</p><h2>Need experienced strategic and technical judgment?</h2><p>Discuss strategic advisory, technical advisory, a government partnership, or a speaking engagement.</p></div><a className="button button-primary" href="/contact">Contact Dr. Jones <span aria-hidden="true">↗</span></a></section>
     </main>

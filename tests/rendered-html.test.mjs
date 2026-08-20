@@ -44,8 +44,11 @@ test("renders expandable project, experience, and research entries", async () =>
   assert.match(projects, /Nuclear Facility Flooding &amp; Tsunami Safety/);
   assert.match(experience, /class="experience-entry"/);
   assert.match(experience, /2016–2019/);
+  assert.match(experience, /Key result/);
+  assert.match(experience, /secured \$60 million/);
   assert.match(research, /class="research-entry"/);
-  assert.match(research, /PUBLICATIONS &amp; PRESENTATIONS/);
+  assert.match(research, /RESEARCH LIBRARY/);
+  assert.match(research, /Technical Reports/);
 });
 
 test("renders both video interviews on the About page", async () => {
@@ -62,6 +65,8 @@ test("presents strategic and technical advisory as distinct services", async () 
   assert.match(advisory, /Providing scientific expertise in oceanography, meteorology, environmental systems/);
   assert.match(advisory, /Strategic Advisory/);
   assert.match(advisory, /Technical Advisory/);
+  assert.match(advisory, /When Dr\. Jones Can Help/);
+  assert.match(advisory, /Independent Technical Review/);
 });
 
 test("includes the luxury maritime visual system and reduced-motion support", async () => {
