@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { publications } from "../page";
-import { ContactCTA, PageIntro } from "../site-components";
+import { createPageMetadata, seoPages } from "../seo";
+import { ContactCTA, ContextLinks, PageIntro, PageSubnav } from "../site-components";
 import { ResearchLibrary, type ResearchItem } from "./research-library";
 
-export const metadata: Metadata = { title: "Research & Publications | Henry Jones, PhD", description: "Research, presentations, and technical work in physical oceanography, atmospheric science, operational meteorology, hydrology, hazards, and environmental modeling." };
+export const metadata: Metadata = createPageMetadata(seoPages.research);
 
 const topics = [
   ["Ocean modeling", "Regional ocean-model sensitivity to atmospheric and scatterometer wind forcing."],
@@ -22,15 +23,74 @@ function researchArea(title: string) {
   return "Regional ocean modeling and atmospheric wind forcing";
 }
 
-const presentationItems: ResearchItem[] = publications.map(([year, type, title, venue]) => ({
-  id: `${year}-${type}-${title}`,
-  year,
-  type,
-  title,
-  context: venue,
-  area: researchArea(title),
-  category: "Presentations",
-}));
+const presentationItems: ResearchItem[] = publications.map(([year, type, title, venue]) => {
+  const isAmsPaper = year === "2003" && title === "Sensitivity of a Navy Regional Ocean Model to High-Resolution Atmospheric and Scatterometer Wind Forcing";
+  const isTsunamiPaper = year === "2010" && title === "Tsunami Safety Criteria and Current Site Reviews in the United States";
+
+  if (isAmsPaper) {
+    return {
+      id: "2003-ams-regional-ocean-model-paper",
+      year,
+      type: "Conference Paper",
+      title: "Sensitivity of a Navy Regional Ocean Model to High-Resolution Atmospheric Model and Scatterometer Wind Forcing",
+      context: "American Meteorological Society · Fifth Conference on Coastal Atmospheric and Oceanic Prediction and Processes",
+      area: researchArea(title),
+      category: "Conference Papers",
+      links: [
+        { label: "View AMS Paper", href: "https://ams.confex.com/ams/pdfpapers/64697.pdf" },
+        { label: "Conference Record", href: "https://ams.confex.com/ams/32BC31R5C/techprogram/programexpanded_173.htm" },
+      ],
+    };
+  }
+
+  if (isTsunamiPaper) {
+    return {
+      id: "2010-iaea-tsunami-safety-paper",
+      year,
+      type: "Conference Paper",
+      title,
+      context: "IAEA International Workshop on External Flooding Hazards at Nuclear Power Plant Sites · Kalpakkam, India",
+      area: researchArea(title),
+      category: "Conference Papers",
+      authors: ["Goutam Bagchi", "Hosung Ahn", "Henry Jones", "Annie Kammerer", "Richard Raione", "Nilesh Chokshi"],
+      links: [
+        { label: "View Paper", href: "https://www.researchgate.net/publication/290394379_Tsunami_Safety_Criteria_and_Current_Site_Reviews_in_the_United_States/download" },
+      ],
+    };
+  }
+
+  return {
+    id: `${year}-${type}-${title}`,
+    year,
+    type,
+    title,
+    context: venue,
+    area: researchArea(title),
+    category: "Presentations",
+  };
+});
+
+const graduateResearchItems: ResearchItem[] = [
+  {
+    id: "2003-nps-doctoral-dissertation",
+    year: "2003",
+    type: "Doctoral Dissertation",
+    title: "Sensitivity of a Navy Regional Ocean Model to High-Resolution Atmospheric and Scatterometer Wind Forcing",
+    context: "Naval Postgraduate School · Ph.D. in Physical Oceanography",
+    area: "Regional ocean modeling and atmospheric wind forcing",
+    category: "Graduate Research",
+    note: "Original Naval Postgraduate School dissertation record; current repository link unavailable.",
+  },
+  {
+    id: "1986-nps-masters-thesis",
+    year: "1986",
+    type: "Master's Thesis",
+    title: "Comparison of Western North Pacific Tropical Cyclone Models Using Synoptic and Storm-Related Parameters",
+    context: "Naval Postgraduate School · M.S. Physical Oceanography and Meteorology",
+    area: "Tropical cyclone modeling and operational meteorology",
+    category: "Graduate Research",
+  },
+];
 
 const technicalReportItems: ResearchItem[] = [
   {
@@ -71,17 +131,20 @@ const technicalReportItems: ResearchItem[] = [
   },
 ];
 
-const researchItems = [...presentationItems, ...technicalReportItems];
+const researchItems = [...presentationItems, ...graduateResearchItems, ...technicalReportItems];
 
 export default function ResearchPage() {
   return (
     <main className="page-shell">
       <PageIntro eyebrow="Research" index="04 / 05" title="Research & Publications." />
-      <section className="section publications content-first">
+      <PageSubnav links={[["Research library", "#research-library"], ["Technical areas", "#research-topics"], ["Advisory services", "/advisory"]]} />
+      <section className="section publications content-first" id="research-library">
+        <h2 className="visually-hidden">Research library</h2>
         <div className="content-label"><span>RESEARCH LIBRARY</span></div>
         <ResearchLibrary items={researchItems} />
       </section>
-      <section className="section topic-summary"><div><p className="eyebrow"><span aria-hidden="true" /> Research topics</p><h2>Technical areas</h2></div><div className="topic-list">{topics.map(([title,copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
+      <section className="section topic-summary" id="research-topics"><div><p className="eyebrow"><span aria-hidden="true" /> Research topics</p><h2>Technical areas</h2></div><div className="topic-list">{topics.map(([title,copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
+      <ContextLinks links={[["Ocean and atmospheric science experience", "/experience"], ["Scientific consulting and advisory services", "/advisory"]]} />
       <ContactCTA />
     </main>
   );

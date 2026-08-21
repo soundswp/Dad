@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { ContactForm } from "./contact-form";
+import { createPageMetadata, seoPages } from "./seo";
 
-export const metadata: Metadata = {
-  title: "Henry Jones, PhD — Ocean & Atmospheric Science Advisor",
-  description: "Retired U.S. Navy Commander and PhD physical oceanographer with senior experience in ocean and atmospheric science, operational meteorology, environmental risk, defense, and federal programs.",
-};
+export const metadata: Metadata = createPageMetadata(seoPages.home);
 
 export type TimelineEntry = {
   dates: string;
@@ -14,6 +12,19 @@ export type TimelineEntry = {
   description: string;
   highlights: string[];
   keyResult?: string;
+  links?: { label: string; href: string; external?: boolean }[];
+};
+
+export type ProjectEntry = {
+  id?: string;
+  dates: string;
+  name: string;
+  organization: string;
+  problem: string;
+  role: string;
+  approach: string;
+  outcome: string;
+  links?: { label: string; href: string }[];
 };
 
 export const expertise = [
@@ -24,12 +35,12 @@ export const expertise = [
 ];
 
 export const services = [
-  ["01", "Strategic Advisory", "Helping organizations evaluate complex decisions, programs, and opportunities."],
-  ["02", "Technical Advisory", "Providing scientific expertise and independent review of technical programs and approaches."],
-  ["03", "Scientific Consulting", "Applying expertise in oceanography, meteorology, environmental systems, and related scientific fields."],
-  ["04", "Government & Federal Partnerships", "Helping organizations understand and work with federal science and defense programs."],
-  ["05", "Environmental Risk Review", "Review of coastal flooding, storm surge, tsunami, seiche, and infrastructure safety questions."],
-  ["06", "Independent Technical Review", "Independent review of complex scientific programs, technical plans, and environmental analyses."],
+  ["01", "Strategic Advisory", "Independent strategic and scientific advice for organizations evaluating complex programs, technology choices, operational requirements, and federal opportunities."],
+  ["02", "Technical Advisory", "Independent review of ocean systems, ocean modeling, atmospheric and weather applications, environmental analyses, and related technologies."],
+  ["03", "Scientific Consulting", "Consulting in physical oceanography, meteorology and atmospheric science, hydrology, tropical cyclones, coastal hazards, and environmental systems."],
+  ["04", "Government & Federal Partnerships", "Guidance informed by Navy, NRC, and USGS experience for organizations working with federal science, defense, research, and technology programs."],
+  ["05", "Environmental Risk Review", "Scientific review of flooding, storm surge, tsunami, seiche, coastal and hydrologic hazards, infrastructure risk, and nuclear external-hazard questions."],
+  ["06", "Independent Technical Review", "Independent review of technical programs, scientific plans, environmental reviews, modeling approaches, and operational transition."],
   ["07", "Board & Advisory Roles", "Available to provide scientific and program-management perspective to boards and advisory groups."],
   ["08", "Speaking Engagements", "Available for talks and discussions on ocean and atmospheric science, public safety, federal programs, and operational leadership."],
 ];
@@ -59,6 +70,11 @@ export const timeline: TimelineEntry[] = [
       "Co-chaired the IAEA Working Group on Tsunami Hazards and served as a member of a Congressional Subcommittee on Hydrology.",
     ],
     keyResult: "Monitored $3 million in multi-year research contracts supporting hydrologic safety work.",
+    links: [
+      { label: "South Texas Project", href: "/projects#south-texas-project" },
+      { label: "PSEG Review", href: "/projects#pseg-early-site-permit-review" },
+      { label: "Flood/Tsunami Hazard Assessment", href: "/projects#probabilistic-flood-tsunami-hazard-assessment" },
+    ],
   },
   {
     dates: "2000–2007",
@@ -150,6 +166,7 @@ export const timeline: TimelineEntry[] = [
       "Served as a certified tropical cyclone forecaster and coordinated U.S. Air Force reconnaissance missions.",
       "Led review of post-storm forecast reanalyses for the Joint Typhoon Warning Center annual report.",
     ],
+    links: [{ label: "Independent NPS Reference", href: "https://calhoun.nps.edu/handle/10945/23099", external: true }],
   },
   {
     dates: "1980–1982",
@@ -174,8 +191,9 @@ export const education = [
   ["1979", "BS, Oceanography", "United States Naval Academy", "Undergraduate degree in oceanography."],
 ];
 
-export const projects = [
+export const projects: ProjectEntry[] = [
   {
+    id: "nuclear-facility-flooding-tsunami-safety",
     dates: "2007–2016",
     name: "Nuclear Facility Flooding & Tsunami Safety",
     organization: "U.S. Nuclear Regulatory Commission / IAEA",
@@ -183,8 +201,10 @@ export const projects = [
     role: "Lead hydrologist and reactor reviewer; co-chair of the IAEA Working Group on Tsunami Hazards; technical monitor for related research.",
     approach: "Hydrologic safety and environmental reviews, hazard research, technical guidance, and oversight of interdisciplinary review teams and research contracts.",
     outcome: "Supported reactor licensing reviews, technical guidance, international coordination, and post-Fukushima hazard reevaluation work.",
+    links: [{ label: "View Technical Report", href: "https://digital.library.unt.edu/ark:/67531/metadc833518/m2/1/high_res_d/1036933.pdf" }],
   },
   {
+    id: "geosat-follow-on-satellite-program",
     dates: "1994–1996",
     name: "Geosat Follow-On Satellite Program",
     organization: "Office of the Oceanographer of the Navy",
@@ -192,6 +212,10 @@ export const projects = [
     role: "Satellite Program Manager responsible for the Navy satellite RDT&E portfolio and operational requirements.",
     approach: "Program management, requirements representation, and oversight of satellite altimetry, synthetic aperture radar, ocean color, hyperspectral, and ocean-wind sensor work.",
     outcome: "Restored the program and secured $60 million in funding for GFO with GFO II.",
+    links: [
+      { label: "About the GFO Program", href: "https://www.history.navy.mil/research/library/online-reading-room/title-list-alphabetically/f/from-sea-stars.html" },
+      { label: "Mission Archive", href: "https://www.star.nesdis.noaa.gov/socd/lsa/GFO/documents/GEOSAT_Follow-On.pdf" },
+    ],
   },
   {
     dates: "1992–1994",
@@ -201,6 +225,39 @@ export const projects = [
     role: "Assistant Program Manager overseeing technical direction and financial execution of the $66 million program.",
     approach: "Program analysis, risk-reduction planning, cost and operational effectiveness studies, and high-energy laser research oversight.",
     outcome: "Analysis, COEA studies, and risk-reduction planning supported transition to advanced development and saved millions in program costs.",
+  },
+  {
+    id: "south-texas-project",
+    dates: "2015",
+    name: "South Texas Project Units 3 & 4",
+    organization: "U.S. Nuclear Regulatory Commission",
+    problem: "The combined license review required technical evaluation of hydrologic and external-flooding safety questions.",
+    role: "Contributed to the NRC review as a Senior Hydrologist responsible for storm surge, seiche, tsunami, and related flooding hazards.",
+    approach: "Applied hydrologic and environmental review within the NRC combined license process and supporting technical proceedings.",
+    outcome: "Supported the NRC safety review and commission hearing record for South Texas Project Units 3 and 4.",
+    links: [{ label: "View NRC Record", href: "https://www.nrc.gov/reading-rm/doc-collections/commission/slides/2015/20151119/nrc-safety-panel3-20151119.pdf" }],
+  },
+  {
+    id: "pseg-early-site-permit-review",
+    dates: "2015",
+    name: "PSEG Early Site Permit Review",
+    organization: "U.S. Nuclear Regulatory Commission",
+    problem: "The proposed site required hydrologic, storm-surge, nuclear-safety, and environmental review during the early site permit process.",
+    role: "Supported the NRC technical review as a Senior Hydrologist evaluating external flooding and environmental considerations.",
+    approach: "Reviewed hydrologic and coastal-hazard information within the NRC early site permit process.",
+    outcome: "Contributed technical review to the federal early site permit evaluation and public meeting process.",
+    links: [{ label: "View NRC Record", href: "https://www.nrc.gov/pmns/mtg?Code=20150452&do=details" }],
+  },
+  {
+    id: "probabilistic-flood-tsunami-hazard-assessment",
+    dates: "2013",
+    name: "Probabilistic Flood & Tsunami Hazard Assessment",
+    organization: "U.S. Nuclear Regulatory Commission",
+    problem: "Nuclear facilities required stronger methods for evaluating extreme flood and tsunami hazards at very low annual probabilities.",
+    role: "Participated as an NRC hydrologist in the workshop panel addressing tsunami flooding and probabilistic tsunami hazard assessment.",
+    approach: "Examined probabilistic methods, tsunami-source characterization, uncertainty, propagation modeling, runup, and inundation for critical facilities.",
+    outcome: "The workshop proceedings documented technical considerations and research needs for probabilistic flood and tsunami hazard assessment.",
+    links: [{ label: "View Proceedings", href: "https://www.govinfo.gov/content/pkg/GOVPUB-Y3_N88-PURL-gpo41258/pdf/GOVPUB-Y3_N88-PURL-gpo41258.pdf" }],
   },
   {
     dates: "1989–1992",
@@ -364,14 +421,29 @@ export function FullProfileArchive() {
 export default function Home() {
   return (
     <main className="page-shell">
-      <section className="hero home-hero" id="top">
+      <header className="hero home-hero" id="top">
         <div className="hero-content">
           <p className="eyebrow hero-eyebrow"><span aria-hidden="true" /> DR. HENRY JONES, PhD</p>
           <h1>Strategic Advisor in Ocean &amp; Atmospheric Science</h1>
           <p className="hero-copy">Helping organizations make informed decisions through decades of scientific expertise, operational leadership, and federal program experience.</p>
           <div className="hero-actions"><a className="button button-primary" href="/experience">Explore experience <span aria-hidden="true">→</span></a><a className="button button-secondary" href="/contact">Contact <span aria-hidden="true">↗</span></a></div>
         </div>
-        <aside className="hero-credentials" aria-label="Professional credentials"><span>Commander</span><strong>U.S. Navy, Retired</strong><span>Doctor of Philosophy</span><strong>Physical Oceanography</strong><span>Federal Service</span><strong>NRC · USGS</strong></aside>
+        <figure className="hero-person">
+          <div className="hero-portrait-frame">
+            <img src="/henry-jones-portrait.webp" alt="Portrait of Dr. Henry Jones, strategic advisor in ocean and atmospheric science" width="1000" height="1000" loading="eager" decoding="async" fetchPriority="high" />
+            <span>Independent advisor</span>
+          </div>
+          <figcaption>
+            <span><small>Commander</small>U.S. Navy, Retired</span>
+            <span><small>PhD</small>Physical Oceanography</span>
+            <span><small>Federal service</small>NRC · USGS</span>
+          </figcaption>
+        </figure>
+      </header>
+
+      <section className="home-profile-summary" aria-label="Scientific consulting profile">
+        <p>Based in Maryland, Dr. Henry Jones is a physical oceanographer, meteorologist, and hydrologist providing independent scientific and technical advisory services to organizations facing ocean, atmospheric, environmental, operational, and federal challenges.</p>
+        <p>He serves clients in Maryland, Washington, DC, Virginia, the broader DMV, and organizations nationwide. Explore his <a href="/experience">ocean and atmospheric science experience</a> or review <a href="/advisory">scientific consulting and advisory services</a>.</p>
       </section>
 
       <section className="impact section home-section" aria-labelledby="highlights-title"><p className="eyebrow"><span aria-hidden="true" /> Career highlights</p><h2 id="highlights-title">Decades of scientific, military, and federal service.</h2><div className="metric-grid"><article><strong>38</strong><h3>Years</h3><p>Professional experience</p></article><article><strong>28</strong><h3>Years</h3><p>Department of Defense service</p></article><article><strong>13</strong><h3>Years</h3><p>Undergraduate and graduate teaching</p></article><article><strong>5</strong><h3>Degrees</h3><p>Scientific, technical, and policy education</p></article></div></section>
