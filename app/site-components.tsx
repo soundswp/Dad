@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { linkedInUrl } from "./seo";
 import { SiteNavigation } from "./site-navigation";
 
@@ -18,8 +17,8 @@ export function SiteHeader() {
 export function SiteFooter() {
   return (
     <footer>
-      <Link className="wordmark" href="/"><span className="mark" aria-hidden="true">HJ</span><span>HENRY JONES, PhD <small>STRATEGIC ADVISOR</small></span></Link>
-      <div className="footer-links"><a href="mailto:contact@henryjonesadvisory.com">Email</a><LinkedInLink /><Link href="/about#awards">Awards</Link></div>
+      <a className="wordmark" href="/"><span className="mark" aria-hidden="true">HJ</span><span>HENRY JONES, PhD <small>STRATEGIC ADVISOR</small></span></a>
+      <div className="footer-links"><a href="mailto:contact@henryjonesadvisory.com">Email</a><LinkedInLink /><a href="/about#awards">Awards</a></div>
       <p>© 2026 Dr. Henry Jones.</p>
     </footer>
   );
@@ -38,13 +37,13 @@ export function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; titl
 }
 
 export function ContactCTA() {
-  return <section className="home-contact"><div><p className="eyebrow"><span aria-hidden="true" /> Contact</p><h2>Discuss a strategic or technical advisory need.</h2><p>Get in touch about ocean and atmospheric science, operational meteorology, environmental risk, federal programs, technical reviews, or speaking engagements.</p></div><Link className="button button-primary" href="/contact">Contact Dr. Jones <span aria-hidden="true">↗</span></Link></section>;
+  return <section className="home-contact"><div><p className="eyebrow"><span aria-hidden="true" /> Contact</p><h2>Discuss a strategic or technical advisory need.</h2><p>Get in touch about ocean and atmospheric science, operational meteorology, environmental risk, federal programs, technical reviews, or speaking engagements.</p></div><a className="button button-primary" href="/contact">Contact Dr. Jones <span aria-hidden="true">↗</span></a></section>;
 }
 
 export function ContextLinks({ links }: { links: [string, string][] }) {
-  return <nav className="context-links" aria-label="Related pages">{links.map(([label, href]) => <Link href={href} key={href}>{label} <span aria-hidden="true">→</span></Link>)}</nav>;
+  return <nav className="context-links" aria-label="Related pages">{links.map(([label, href]) => <a href={href} key={href}>{label} <span aria-hidden="true">→</span></a>)}</nav>;
 }
 
 export function PageSubnav({ links }: { links: [string, string][] }) {
-  return <nav className="page-subnav" aria-label="Page sections"><span>Explore</span><div>{links.map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}</div></nav>;
+  return <nav className="page-subnav" aria-label="Page sections"><span>Explore</span><div>{links.map(([label, href]) => <a href={href} key={href}>{label}</a>)}</div></nav>;
 }
